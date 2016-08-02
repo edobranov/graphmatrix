@@ -87,7 +87,7 @@ quit
 me@linux:~$ 
 ````
 
-The paths are depicted in the format of `\<vertex\> (\<emitted edge\>) -> ...`
+The paths are depicted in the format of `<vertex> (<emitted edge>) -> ...`
 
 ## Inner Workings & Data Structure Design
 

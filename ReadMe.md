@@ -113,7 +113,7 @@ The primary data structure is a GraphMatrix, which looks like this:
 |  D  |   |   |   |   |     |
 | ... |   |   |   |   |     |
 
-If this was VertexIn.txt, then it signifies that vertex A receives edge 2, vertex B receives edges 1 and 4, etc.
+The left-hand column depicts all vertices, while the top-most row depicts all edges. If this was VertexIn.txt, then it signifies that vertex A receives edge 2, vertex B receives edges 1 and 4, etc.
 
 The main() function contains one matrix for each file, and controls communication between the two in order to retrieve paths.
 

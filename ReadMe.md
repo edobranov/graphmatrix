@@ -89,7 +89,7 @@ me@linux:~$
 
 The paths are depicted in the format of `<vertex> (<emitted edge>) -> ...`
 
-## Inner Workings & Data Structure Design
+## Inner Workings, Data Structure & Algorithm Design
 
 #### Core Files
 
@@ -101,7 +101,7 @@ The paths are depicted in the format of `<vertex> (<emitted edge>) -> ...`
 
 * **Makefile** - Contains the compiling commands.
 
-#### Data Structure
+#### Data Structure & Algorithm
 
 The primary data structure is a GraphMatrix, which looks like this:
 
@@ -115,8 +115,15 @@ The primary data structure is a GraphMatrix, which looks like this:
 
 If this was VertexIn.txt, then it signifies that vertex A receives edge 2, vertex B receives edges 1 and 4, etc.
 
-The main() function contains one matrix for each file, and controls communication between the two in order to retrieve paths. To begin searching for a path, the program looks at the data from VertexOut.txt in row-major (i.e. - the edges) and tries to find the edges being emitted from the first vertex. It will eventually span all of those edges, but when it finds just one, it starts to look at the data from VertexIn.txt in column-major (i.e. - the vertices) and searches for vertices that might receive that edge.
+The main() function contains one matrix for each file, and controls communication between the two in order to retrieve paths.
 
-The program "bounces" back and forth between the two matrices in a recursive fashion, marking paths that were already searched with an "F" instead of a "T" to prevent infinite loops. It eventually exhausts all path possibilities.
+The algorithm works in a few simple steps:
 
-The method for finding the shortest path is as simple as finding the path with the fewest number of connections from the prior function.
+1. Search for the current vertex in the data from VertexOut.txt in the first column (where all vertices are found).
+2. Try to find an edge directed out of this vertex for a possible path (by searching across the row of the current vertex).
+3. When (if) an edge is found, locate the edge in the data from VertexIn.txt and search for vertices that might receive this edge (down the column).
+4. When (if) this vertex is found, label this vertex as your current vertex and go back to step 1.
+
+The algorithm essentially "bounces" back and forth between the two matrices in a recursive fashion, marking paths that were already searched with an "F" instead of a "T" to prevent infinite loops. It eventually exhausts all path possibilities between the two matrices.
+
+The method for finding the shortest path is as simple as finding the path with the fewest number of connections.
